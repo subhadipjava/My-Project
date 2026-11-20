@@ -1,0 +1,376 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #071629, #142e4f);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.login-container {
+    width: 420px;
+    max-width: 90%;
+    padding: 40px;
+    background: #ffffff;
+    color: #172b45;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.login-logo {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 20px;
+    background: #12365e;
+    color: #ffffff;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #718096;
+    margin: 10px 0 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d6dfeb;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #2463a5;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background: #12365e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #1b568e;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #718096;
+    font-size: 12px;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 28px 22px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+}
+
+/* ===== DASHBOARD DESIGN ===== */
+
+.dashboard-body {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    background: #f1f5f9;
+    color: #172b45;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #071629;
+    color: white;
+    padding: 30px 20px;
+    flex-shrink: 0;
+}
+
+.sidebar-logo {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.sidebar-subtitle {
+    text-align: center;
+    font-size: 10px;
+    color: #8da5c1;
+    margin: 10px 0 40px;
+    letter-spacing: 1px;
+}
+
+.sidebar nav a {
+    display: block;
+    color: #c5d2e1;
+    text-decoration: none;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background: #1c4775;
+    color: white;
+}
+
+/* Main area */
+.dashboard-main {
+    flex: 1;
+    padding: 35px;
+    min-width: 0;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    text-align: left;
+    font-size: 27px;
+}
+
+.dashboard-header p {
+    color: #718096;
+    margin-top: 8px;
+}
+
+.admin-label {
+    background: #dceafe;
+    color: #12365e;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Welcome */
+.welcome-section {
+    background: linear-gradient(120deg, #12365e, #2463a5);
+    color: white;
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.welcome-section h2 {
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    color: #d5e5f8;
+    font-size: 14px;
+}
+
+/* Statistics */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    border-left: 5px solid #2463a5;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.stat-card p {
+    color: #718096;
+    font-size: 14px;
+}
+
+.stat-card h2 {
+    font-size: 32px;
+    margin: 15px 0 8px;
+}
+
+.stat-card span {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.stat-card.ready {
+    border-left-color: #16a36a;
+}
+
+.stat-card.maintenance {
+    border-left-color: #e5a000;
+}
+
+.stat-card.unavailable {
+    border-left-color: #dc4545;
+}
+
+/* Recent records */
+.recent-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.recent-section h2 {
+    text-align: left;
+    font-size: 20px;
+    margin-bottom: 22px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 600px;
+}
+
+th, td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #e8edf3;
+    font-size: 13px;
+}
+
+th {
+    background: #f5f8fc;
+    color: #53657a;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.ready-text {
+    color: #16a36a;
+}
+
+.maintenance-text {
+    color: #d18b00;
+}
+
+.unavailable-text {
+    color: #dc4545;
+}
+
+.dashboard-footer {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 35px;
+}
+
+/* Responsive design */
+@media (max-width: 1000px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .dashboard-body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .sidebar nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .sidebar nav a {
+        margin-bottom: 0;
+    }
+
+    .dashboard-main {
+        padding: 20px;
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Maintenance Edit Button */
+.edit-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.edit-btn:hover {
+    background: #1d4ed8;
+}
+
+.edit-btn:active {
+    transform: scale(0.97);
+}
