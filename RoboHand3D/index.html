@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboHand 3D | Virtual Robotics Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="app">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-icon">R</div>
+                <div>
+                    <h1>RoboHand <span>3D</span></h1>
+                    <p>VIRTUAL ROBOTICS LAB</p>
+                </div>
+            </div>
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+        </header>
+
+        <main class="main-layout">
+
+            <section class="robot-section">
+                <div class="section-heading">
+                    <div>
+                        <h2>Robotic Hand Simulation</h2>
+                        <p>Real-time 3D gesture visualization</p>
+                    </div>
+                    <div class="live-badge">● LIVE VIEW</div>
+                </div>
+
+                <div id="robot-container">
+                    <div class="loading-message" id="loading-message">
+                        Initializing 3D robotic hand...
+                    </div>
+
+                    <div class="robot-label">RH-01 / PROTOTYPE</div>
+                    <div class="robot-coordinates">X: 000 &nbsp; Y: 000 &nbsp; Z: 000</div>
+                </div>
+
+                <div class="gesture-info">
+                    <div class="gesture-icon">✋</div>
+                    <div>
+                        <h3 id="gesture-name">Waiting for hand...</h3>
+                        <p id="gesture-description">
+                            Enable your webcam to begin controlling RoboHand.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="control-panel">
+
+                <div class="panel-card camera-card">
+                    <div class="card-heading">
+                        <h3>CAMERA INPUT</h3>
+                    </div>
+
+                    <div class="camera-frame">
+                        <video id="webcam" autoplay playsinline></video>
+                        <div class="camera-overlay" id="camera-overlay">
+                            <span>CAMERA OFFLINE</span>
+                        </div>
+                    </div>
+
+                    <button id="start-camera" class="primary-btn">
+                        <span>▶</span> Start Webcam
+                    </button>
+
+                    <p class="small-note">
+                        Allow camera access when your browser asks.
+        </p>
+                </div>
+
+                <div class="panel-card">
+                    <div class="card-heading">
+                        <h3>HAND TRACKING</h3>
+                        <span id="tracking-status" class="status-text">INACTIVE</span>
+                    </div>
+
+                    <div class="metric">
+                        <span>Tracking confidence</span>
+                        <strong id="confidence">0%</strong>
+                    </div>
+
+            <div class="progress-track">
+                <div id="confidence-bar" class="progress-fill"></div>
+            </div>
+
+            <div class="metric">
+                <span>Detected gesture</span>
+                <strong id="detected-gesture">None</strong>
+            </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="card-heading">
+                        <h3>FINGER STATUS</h3>
+                    </div>
+
+                    <div class="finger-row">
+                        <span>Thumb</span>
+                        <div class="finger-track"><div id="thumb-bar"></div></div>
+                        <strong id="thumb-value">0%</strong>
+                    </div>
+
+                    <div class="finger-row">
+                        <span>Index</span>
+                        <div class="finger-track"><div id="index-bar"></div></div>
+                        <strong id="index-value">0%</strong>
+                    </div>
+
+                    <div class="finger-row">
+                        <span>Middle</span>
+                        <div class="finger-track"><div id="middle-bar"></div></div>
+                        <strong id="middle-value">0%</strong>
+                    </div>
+
+                    <div class="finger-row">
+                        <span>Ring</span>
+                        <div class="finger-track"><div id="ring-bar"></div></div>
+                        <strong id="ring-value">0%</strong>
+                    </div>
+
+                    <div class="finger-row">
+                        <span>Little</span>
+                        <div class="finger-track"><div id="little-bar"></div></div>
+                        <strong id="little-value">0%</strong>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="card-heading">
+                        <h3>CONTROL MODE</h3>
+                    </div>
+                    <div class="mode-display">
+                <span class="mode-indicator"></span>
+                <span>WEBCAM / GESTURE CONTROL</span>
+            </div>
+            <p class="small-note">
+                Your detected finger movements control the virtual robotic joints.
+            </p>
+                </div>
+
+            <button id="reset-hand" class="secondary-btn">
+                ↻ Reset Robotic Hand
+            </button>
+
+            <p class="footer-note">ROBOHAND 3D · B.TECH CSE PROJECT</p>
+
+            </aside>
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
