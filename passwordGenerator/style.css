@@ -1,0 +1,232 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #10152c, #202b50);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #aab4d0;
+    font-size: 14px;
+}
+
+.generator-card {
+    background: #1b2442;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #354267;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.generator-card h2 {
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.password-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.password-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    background: #101831;
+    border: 1px solid #45547d;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#copyBtn {
+    padding: 0 18px;
+    background: #354b80;
+    color: white;
+}
+
+#copyBtn:hover {
+    background: #4969b0;
+}
+
+.strength-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: #c2cbe0;
+}
+
+#strengthText {
+    color: #f5c542;
+    font-weight: bold;
+}
+
+.length-section {
+    margin-bottom: 25px;
+}
+
+.length-section label {
+    font-weight: bold;
+}
+
+#lengthValue {
+    float: right;
+    color: #8d9fff;
+    font-weight: bold;
+}
+
+#length {
+    width: 100%;
+    margin-top: 18px;
+    cursor: pointer;
+    accent-color: #7189ff;
+}
+
+.options {
+    margin-bottom: 25px;
+}
+
+.options h3 {
+    margin-bottom: 18px;
+    font-size: 17px;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 15px;
+    color: #c7cfe3;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.options input {
+    margin-right: 10px;
+    accent-color: #7189ff;
+    cursor: pointer;
+}
+
+.generate-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #536dfe, #8957e5);
+    color: white;
+    font-size: 16px;
+}
+
+.generate-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+footer {
+    text-align: center;
+    margin-top: 22px;
+    color: #929fbd;
+    font-size: 12px;
+}
+
+@media (max-width: 480px) {
+    .generator-card {
+        padding: 22px;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .password-box {
+        flex-wrap: wrap;
+    }
+
+    .password-box input {
+        width: 100%;
+    }
+
+    #copyBtn {
+        padding: 12px 18px;
+    }
+}
+
+/* Show / Hide Password Button */
+
+#toggleBtn {
+    padding: 0 15px;
+    background: #354b80;
+    color: white;
+}
+
+#toggleBtn:hover {
+    background: #4969b0;
+}
+
+/* Password Strength Meter */
+
+.strength-bar {
+    width: 100%;
+    height: 8px;
+    background: #354267;
+    border-radius: 10px;
+    margin-top: -15px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+#strengthFill {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* Notification Message */
+
+#notification {
+    text-align: center;
+    font-size: 13px;
+    color: #4ade80;
+    margin-top: 15px;
+    min-height: 16px;
+}
+
+/* Password Input */
+
+.password-box input {
+    letter-spacing: 1px;
+}
