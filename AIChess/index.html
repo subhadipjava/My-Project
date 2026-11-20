@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Chess Arena</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #05070a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        .background {
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,0.70),
+                    rgba(0,0,0,0.35),
+                    rgba(0,0,0,0.20)
+                ),
+                url("home-bg.png");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            z-index: -2;
+
+            /* Only the background moves */
+            animation: backgroundMove 18s ease-in-out infinite alternate;
+        }
+
+        /* Soft background lighting */
+
+        .background::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 70% 50%,
+                    rgba(255,190,80,0.12),
+                    transparent 35%
+                );
+
+            /* Background effect only */
+            animation: glow 5s ease-in-out infinite alternate;
+        }
+
+        /* Background movement */
+
+        @keyframes backgroundMove {
+
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.04);
+            }
+
+        }
+
+        /* Background glow */
+
+        @keyframes glow {
+
+            from {
+                opacity: 0.4;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================== */
+
+        nav {
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(0,0,0,0.55);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(8px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f4b942;
+        }
+
+        nav a {
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 30px;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #f4b942;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: calc(100vh - 75px);
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 60px 7%;
+
+            position: relative;
+        }
+
+        .content {
+            max-width: 650px;
+        }
+
+        /* Tagline */
+
+        .tagline {
+            color: #f4b942;
+
+            letter-spacing: 5px;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+
+            /* No animation */
+            animation: none;
+        }
+
+        /* Main heading */
+
+        .content h1 {
+            font-size: clamp(45px, 6vw, 75px);
+
+            line-height: 1.05;
+
+            margin-bottom: 25px;
+
+            /* No animation */
+            animation: none;
+        }
+
+        .content h1 span {
+            color: #f4b942;
+        }
+
+        /* Description */
+
+        .content p {
+            max-width: 580px;
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            color: #ddd;
+
+            margin-bottom: 35px;
+
+            /* No animation */
+            animation: none;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .buttons {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            /* No animation */
+            animation: none;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #f4b942;
+
+            color: #111;
+
+            box-shadow:
+                0 0 20px rgba(244,185,66,0.3);
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 0 30px rgba(244,185,66,0.6);
+        }
+
+        .secondary {
+            border: 1px solid white;
+
+            color: white;
+
+            background: rgba(0,0,0,0.25);
+        }
+
+        .secondary:hover {
+            background: white;
+
+            color: #111;
+        }
+
+        /* =========================
+           FEATURES
+        ========================== */
+
+        .features {
+            display: flex;
+
+            gap: 35px;
+
+            margin-top: 60px;
+
+            /* No animation */
+            animation: none;
+        }
+
+        .feature {
+            border-left:
+                1px solid rgba(244,185,66,0.6);
+
+            padding-left: 15px;
+        }
+
+        .feature strong {
+            display: block;
+
+            color: #f4b942;
+
+            margin-bottom: 5px;
+        }
+
+        .feature span {
+            color: #bbb;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            nav a {
+                margin-left: 12px;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 50px 7%;
+            }
+
+            .features {
+                flex-wrap: wrap;
+
+                gap: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Animated Background -->
+
+    <div class="background"></div>
+
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="logo">
+            ♟ <span>AI Chess</span> Arena
+        </div>
+
+
+        <div>
+
+            <a href="#">
+                Home
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="content">
+
+            <div class="tagline">
+                THINK • PLAY • IMPROVE
+            </div>
+
+
+            <h1>
+
+                AI-Powered
+
+                <br>
+
+                <span>Chess Game</span>
+
+                <br>
+
+                and Analysis System
+
+            </h1>
+
+
+            <p>
+
+                Play against AI, analyze your games,
+                track your progress and improve your
+                chess skills.
+
+            </p>
+
+
+            <div class="buttons">
+
+                <a href="login.html"
+                   class="btn primary">
+
+                    ♟ Login →
+
+                </a>
+
+
+                <a href="register.html"
+                   class="btn secondary">
+
+                    Register →
+
+                </a>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <strong>
+                        🤖 Smart AI
+                    </strong>
+
+                    <span>
+                        Easy • Medium • Hard
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <strong>
+                        📊 Analysis
+                    </strong>
+
+                    <span>
+                        Analyze Your Games
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <strong>
+                        🏆 History
+                    </strong>
+
+                    <span>
+                        Track Your Progress
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>

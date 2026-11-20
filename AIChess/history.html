@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Game History - AI Chess Arena</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(212, 167, 92, 0.14),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #070707,
+                    #15100b 55%,
+                    #050505
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        /* Background glow */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            top: -250px;
+            right: -150px;
+
+            background: rgba(212, 167, 92, 0.08);
+
+            border-radius: 50%;
+
+            filter: blur(80px);
+
+            pointer-events: none;
+        }
+
+
+        /* Header */
+
+        .header {
+
+            width: 100%;
+
+            padding: 55px 20px 45px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0,0,0,0.95),
+                    rgba(18,13,8,0.88)
+                );
+
+            border-bottom: 1px solid
+                rgba(212,167,92,0.25);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.45);
+        }
+
+
+        .header h1 {
+
+            font-size: clamp(32px, 5vw, 48px);
+
+            color: #d4a75c;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-shadow:
+                0 3px 15px rgba(212,167,92,0.25);
+
+            margin-bottom: 10px;
+        }
+
+
+        .header h1::before {
+
+            content: "♟";
+
+            color: #d4a75c;
+
+            margin-right: 14px;
+
+            font-size: 0.8em;
+        }
+
+
+        .header p {
+
+            color: #bdb5a8;
+
+            font-size: 15px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* Main container */
+
+        .container {
+
+            width: min(1050px, 92%);
+
+            margin: 55px auto;
+
+        }
+
+
+        /* Welcome */
+
+        .welcome {
+
+            margin-bottom: 28px;
+        }
+
+
+        .welcome h2 {
+
+            color: #f0c875;
+
+            font-size: clamp(25px, 4vw, 34px);
+
+            margin-bottom: 7px;
+        }
+
+
+        .welcome p {
+
+            color: #aaa;
+
+            font-size: 16px;
+        }
+
+
+        /* History card */
+
+        .history-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(35,29,22,0.95),
+                    rgba(13,13,13,0.96)
+                );
+
+            border: 1px solid
+                rgba(212,167,92,0.28);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.5);
+        }
+
+
+        /* Table */
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        thead {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #21180e,
+                    #30210f,
+                    #21180e
+                );
+        }
+
+
+        th {
+
+            padding: 18px 20px;
+
+            color: #f0c875;
+
+            font-size: 14px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            border-bottom: 1px solid
+                rgba(212,167,92,0.35);
+        }
+
+
+        td {
+
+            padding: 18px 20px;
+
+            text-align: center;
+
+            color: #e5e5e5;
+
+            font-size: 15px;
+
+            border-bottom: 1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        tbody tr {
+
+            transition: 0.25s ease;
+        }
+
+
+        tbody tr:hover {
+
+            background:
+                rgba(212,167,92,0.08);
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        /* Result */
+
+        .result {
+
+            font-weight: 700;
+
+            text-transform: capitalize;
+
+            color: #f0c875;
+        }
+
+
+        /* Empty history */
+
+        .empty {
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: #999;
+
+            font-size: 16px;
+        }
+
+
+        /* Back button */
+
+        .back-area {
+
+            margin-top: 30px;
+        }
+
+
+        .back {
+
+            display: inline-block;
+
+            padding: 13px 24px;
+
+            border-radius: 9px;
+
+            border: 1px solid
+                rgba(212,167,92,0.45);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d4a75c,
+                    #b8863b
+                );
+
+            color: #17110a;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            transition: 0.25s ease;
+
+            box-shadow:
+                0 8px 25px rgba(212,167,92,0.18);
+        }
+
+
+        .back:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(212,167,92,0.3);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0c875,
+                    #d4a75c
+                );
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 650px) {
+
+            .header {
+
+                padding: 40px 15px 35px;
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin: 35px auto;
+            }
+
+
+            .history-card {
+
+                overflow-x: auto;
+            }
+
+
+            table {
+
+                min-width: 600px;
+            }
+
+
+            .welcome h2 {
+
+                font-size: 27px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .header h1 {
+
+                font-size: 30px;
+            }
+
+
+            .header p {
+
+                font-size: 13px;
+            }
+
+
+            th,
+            td {
+
+                padding: 14px 12px;
+
+                font-size: 13px;
+            }
+
+
+            .back {
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <h1>Game History</h1>
+
+        <p>
+            AI-Based Chess Game and Analysis System
+        </p>
+
+    </header>
+
+
+    <!-- Main -->
+
+    <main class="container">
+
+
+        <!-- Welcome -->
+
+        <section class="welcome">
+
+            <h2 id="welcomeUser">
+                Welcome!
+            </h2>
+
+            <p>
+                Your Previous Games
+            </p>
+
+        </section>
+
+
+        <!-- History -->
+
+        <section class="history-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Result
+                        </th>
+
+                        <th>
+                            Date &amp; Time
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="historyTable">
+
+                    <!-- JavaScript loads history here -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- Back -->
+
+        <div class="back-area">
+
+            <a href="dashboard.html"
+               class="back">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        /* Check logged-in user */
+
+        fetch("user")
+
+            .then(response => response.text())
+
+            .then(username => {
+
+                if (username === "Guest") {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+
+                document.getElementById(
+                    "welcomeUser"
+                ).textContent =
+                    "Welcome, " + username + "!";
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Error checking user:",
+                    error
+                );
+
+                window.location.href =
+                    "login.html";
+
+            });
+
+
+        /* Load game history */
+
+        fetch("history")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load history"
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(history => {
+
+                const table =
+                    document.getElementById(
+                        "historyTable"
+                    );
+
+
+                table.innerHTML = "";
+
+
+                if (
+                    !history ||
+                    history.length === 0
+                ) {
+
+                    table.innerHTML = `
+
+                        <tr>
+
+                            <td colspan="2"
+                                class="empty">
+
+                                No games played yet.
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                    return;
+                }
+
+
+                history.forEach(game => {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    const resultCell =
+                        document.createElement(
+                            "td"
+                        );
+
+
+                    resultCell.className =
+                        "result";
+
+
+                    resultCell.textContent =
+                        game.result;
+
+
+                    const dateCell =
+                        document.createElement(
+                            "td"
+                        );
+
+
+                    dateCell.textContent =
+                        game.played_at;
+
+
+                    row.appendChild(
+                        resultCell
+                    );
+
+
+                    row.appendChild(
+                        dateCell
+                    );
+
+
+                    table.appendChild(
+                        row
+                    );
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Error loading game history:",
+                    error
+                );
+
+                document.getElementById(
+                    "historyTable"
+                ).innerHTML = `
+
+                    <tr>
+
+                        <td colspan="2"
+                            class="empty">
+
+                            Unable to load game history.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>

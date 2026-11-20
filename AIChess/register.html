@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register | AI Chess Arena</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    rgba(8, 6, 4, 0.78),
+                    rgba(8, 6, 4, 0.90)
+                ),
+                url("dashboard-bg.png");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+
+            padding: 25px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 520px;
+        }
+
+        /* BRAND */
+
+        .brand {
+            text-align: center;
+
+            margin-bottom: 22px;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            color: #d6a84f;
+        }
+
+        .brand span {
+            color: #f1e6c8;
+        }
+
+        /* MAIN CARD */
+
+        .register-box {
+            position: relative;
+
+            background: rgba(20, 16, 11, 0.94);
+
+            border: 1px solid rgba(214, 168, 79, 0.45);
+
+            border-radius: 5px;
+
+            padding: 42px 42px 38px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.65),
+                inset 0 0 40px rgba(214,168,79,0.03);
+        }
+
+        /* CHESS ICON */
+
+        .logo {
+            width: 72px;
+            height: 72px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(214,168,79,0.65);
+
+            border-radius: 50%;
+
+            font-size: 39px;
+
+            color: #d6a84f;
+        }
+
+        /* TITLE */
+
+        h1 {
+            text-align: center;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 30px;
+
+            letter-spacing: 1px;
+
+            color: #f5ead0;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #aaa39a;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+
+            line-height: 1.6;
+        }
+
+        .line {
+            width: 65px;
+            height: 2px;
+
+            background: #d6a84f;
+
+            margin: 0 auto 25px;
+        }
+
+        /* FORM */
+
+        label {
+            display: block;
+
+            margin-top: 17px;
+            margin-bottom: 7px;
+
+            color: #d8d0c3;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.7px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            background: rgba(255,255,255,0.04);
+
+            color: #f5ead0;
+
+            border: 1px solid #55493a;
+
+            border-radius: 3px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+        input::placeholder {
+            color: #777066;
+        }
+
+        input:focus {
+            border-color: #d6a84f;
+
+            box-shadow:
+                0 0 0 2px rgba(214,168,79,0.10);
+        }
+
+        /* BUTTON */
+
+        button {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 28px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            background: #d6a84f;
+
+            color: #17120b;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.4px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: #efd080;
+
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* LOGIN LINK */
+
+        .login-link {
+            text-align: center;
+
+            margin-top: 24px;
+
+            color: #8f887f;
+
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #d6a84f;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+            margin-left: 4px;
+        }
+
+        .login-link a:hover {
+            color: #efd080;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #706b64;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 18px;
+            }
+
+            .register-box {
+                padding: 35px 23px 32px;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .logo {
+                width: 65px;
+                height: 65px;
+                font-size: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="register-container">
+
+        <div class="brand">
+            ♟ <span>AI CHESS</span> ARENA
+        </div>
+
+
+        <div class="register-box">
+
+            <div class="logo">
+                ♔
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <h1>
+                Create Your Account
+            </h1>
+
+
+            <p class="subtitle">
+                Join the arena and begin your chess journey.
+            </p>
+
+
+            <form action="register" method="post">
+
+
+                <label for="username">
+                    PLAYER USERNAME
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose your player name"
+                    required
+                >
+
+
+                <label for="email">
+                    EMAIL ADDRESS
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="password">
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+
+                <button type="submit">
+                    CREATE PLAYER ACCOUNT&nbsp; →
+                </button>
+
+            </form>
+
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer">
+            THINK • PLAY • IMPROVE
+        </div>
+
+    </div>
+
+</body>
+
+</html>
